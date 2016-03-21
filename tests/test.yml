@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  become: true
+
+  vars:
+    samba_users:
+      - name: travis
+        password: tr4v1s
+
+  roles:
+    - ansible-role-samba

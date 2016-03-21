@@ -1,0 +1,7 @@
+---
+samba_config: ''
+
+# Users must already exist!
+samba_users: []
+#  - name: username
+#    password: password

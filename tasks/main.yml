@@ -1,0 +1,23 @@
+---
+- name: Install samba
+  apt:
+    pkg: samba
+    state: present
+
+- name: configure samba
+  template:
+    src: smb.conf
+    dest: /etc/samba/smb.conf
+    owner: root
+    group: root
+    mode: '644'
+
+- name: Create samba users
+  register: _samba_user_created
+  shell: >
+    (pdbedit -L | grep {{ item.name }} 2>&1 > /dev/null) \
+    || (echo {{ item.password }}; echo {{ item.password }}) \
+    | smbpasswd -s -a {{ item.name }}
+  with_items: '{{ samba_users }}'
+  when: samba_users|length
+  changed_when: false
