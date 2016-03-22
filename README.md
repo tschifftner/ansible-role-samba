@@ -6,28 +6,14 @@ Installs samba on Debian/Ubuntu linux servers.
 
 ## Requirements
 
-ansible 1.8+
+ansible 1.9+
 
 ## Role Variables
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
 ```
-samba_config: |
-    [www]
-       path = /var/www
-       available = yes
-       valid users = vagrant
-       follow symlinks = no
-       read only = no
-       browseable = yes
-       public = yes
-       writable = yes
-       hide dot files = no
-       veto files = /.git/
-       map archive = yes
-       map system = yes
-       map hidden = yes
+samba_config_file: 'your/file/path.conf'
        
 samba_users:
   - name: vagrant
@@ -55,6 +41,7 @@ $ ansible-galaxy install tschifftner.samba
 ## Supported OS
 Ansible          | Debian Jessie    | Ubuntu 14.04    | Ubuntu 12.04
 :--------------: | :--------------: | :-------------: | :-------------: 
+1.9              | Yes              | Yes             | Yes
 2.0              | Yes              | Yes             | Yes
 
 
