@@ -6,7 +6,7 @@
 
 - name: configure samba
   template:
-    src: smb.conf
+    src: '{{ samba_config_template }}'
     dest: /etc/samba/smb.conf
     owner: root
     group: root

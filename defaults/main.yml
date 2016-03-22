@@ -5,3 +5,5 @@ samba_config: ''
 samba_users: []
 #  - name: username
 #    password: password
+
+samba_config_template: 'smb.conf'
