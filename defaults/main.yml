@@ -1,9 +1,7 @@
 ---
-samba_config: ''
-
 # Users must already exist!
 samba_users: []
 #  - name: username
 #    password: password
 
-samba_config_template: 'smb.conf'
+samba_config_file: 'smb_default.conf'

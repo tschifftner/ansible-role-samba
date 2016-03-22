@@ -5,15 +5,14 @@
     state: present
 
 - name: configure samba
-  template:
-    src: '{{ samba_config_template }}'
+  copy:
+    src: '{{ samba_config_file }}'
     dest: /etc/samba/smb.conf
     owner: root
     group: root
     mode: '644'
 
 - name: Create samba users
-  register: _samba_user_created
   shell: >
     (pdbedit -L | grep {{ item.name }} 2>&1 > /dev/null) \
     || (echo {{ item.password }}; echo {{ item.password }}) \
