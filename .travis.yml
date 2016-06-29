@@ -5,8 +5,19 @@ sudo: required
 dist: trusty
 
 env:
-  - SITE=test.yml ANSIBLE_VERSION=1.9.4
+  - SITE=test.yml ANSIBLE_VERSION=latest
+  - SITE=test.yml ANSIBLE_VERSION=2.1.0.0
+  - SITE=test.yml ANSIBLE_VERSION=2.0.2.0
   - SITE=test.yml ANSIBLE_VERSION=2.0.1.0
+  - SITE=test.yml ANSIBLE_VERSION=2.0.0.2
+  - SITE=test.yml ANSIBLE_VERSION=2.0.0.1
+  - SITE=test.yml ANSIBLE_VERSION=2.0.0.0
+
+matrix:
+  allow_failures:
+    - env: SITE=test.yml ANSIBLE_VERSION=2.0.0.2
+    - env: SITE=test.yml ANSIBLE_VERSION=2.0.0.1
+    - env: SITE=test.yml ANSIBLE_VERSION=2.0.0.0
 
 before_install:
   - sudo apt-get update -qq
@@ -15,7 +26,7 @@ before_install:
 
 install:
   # Install Ansible.
-  - pip install ansible==$ANSIBLE_VERSION
+  - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install --no-binary ansible ansible; else pip install --no-binary ansible ansible==$ANSIBLE_VERSION; fi
 
   # Add ansible.cfg to pick up roles path.
   - "{ echo '[defaults]'; echo 'roles_path = ../'; } >> ansible.cfg"
