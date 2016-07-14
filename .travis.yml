@@ -1,28 +1,21 @@
 ---
-language: python
-python: "2.7"
 sudo: required
 dist: trusty
+
+language: python
+python: "2.7"
 
 env:
   - SITE=test.yml ANSIBLE_VERSION=latest
   - SITE=test.yml ANSIBLE_VERSION=2.1.0.0
-  - SITE=test.yml ANSIBLE_VERSION=2.0.2.0
-  - SITE=test.yml ANSIBLE_VERSION=2.0.1.0
-  - SITE=test.yml ANSIBLE_VERSION=2.0.0.2
-  - SITE=test.yml ANSIBLE_VERSION=2.0.0.1
-  - SITE=test.yml ANSIBLE_VERSION=2.0.0.0
 
-matrix:
-  allow_failures:
-    - env: SITE=test.yml ANSIBLE_VERSION=2.0.0.2
-    - env: SITE=test.yml ANSIBLE_VERSION=2.0.0.1
-    - env: SITE=test.yml ANSIBLE_VERSION=2.0.0.0
+branches:
+  only:
+    - master
 
 before_install:
   - sudo apt-get update -qq
-  - sudo apt-get install -y curl php5
-  - pip install --upgrade pip
+  - sudo apt-get install -y curl
 
 install:
   # Install Ansible.
